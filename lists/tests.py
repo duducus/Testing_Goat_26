@@ -6,6 +6,14 @@ class HomePageTest(TestCase):
         response = self.client.get("/")
         self.assertTemplateUsed(response, "home.html")
 
+    def test_renders_input_form(self):  
+        response = self.client.get("/")
+        self.assertContains(response, '<form method="POST">')          
+
+    def test_renders_homepage_content(self):
+        response = self.client.get("/")
+        self.assertContains(response, "To-Do")
+
     def test_displays_all_list_items(self):
         Item.objects.create(text="itemey 1")  
         Item.objects.create(text="itemey 2")  
